@@ -1,4 +1,4 @@
-package com.swlc.snake;
+package com.swlc.snake.constant;
 
 /**
  * @author Chanuka Sandaruwan

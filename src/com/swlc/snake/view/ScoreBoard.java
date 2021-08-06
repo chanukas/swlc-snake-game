@@ -1,7 +1,10 @@
-package com.swlc.snake;
+package com.swlc.snake.view;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static com.swlc.snake.constant.Constants.SCORE_PANEL_HEIGHT;
+import static com.swlc.snake.constant.Constants.SCORE_PANEL_WIDTH;
 
 /**
  * @author Chanuka Sandaruwan
@@ -9,22 +12,30 @@ import java.awt.*;
  * @project swlc-snake-game
  */
 
+
+/**
+ * This panel is responsible for displaying the current score of the user.
+ *
+ */
+
 public class ScoreBoard extends JPanel {
 
-    public static final int PANEL_WIDTH = 500;
-    public static final int PANEL_HEIGHT = 50;
 
     private final Font FONT;
-    private final String SCORE_LABEL = "SCORE:";
     private String score;
 
     public ScoreBoard() {
-        setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        setPreferredSize(new Dimension(SCORE_PANEL_WIDTH, SCORE_PANEL_HEIGHT));
         setBackground(Color.BLUE);
 
         score = "0";
         FONT = new Font("SansSerif", Font.BOLD, 20);
     }
+
+    /**
+     * Update current score.
+     * @param points The amount of points
+     */
 
     public void addPoints(int points) {
         int oldValue = Integer.parseInt(score);
@@ -32,6 +43,10 @@ public class ScoreBoard extends JPanel {
         score = new String(oldValue + "");
         repaint();
     }
+
+    /**
+     * Clears the score back to its intial value of 0
+     */
 
     public void clear() {
         score = "0";
@@ -44,12 +59,13 @@ public class ScoreBoard extends JPanel {
 
         g2.setFont(FONT);
         g2.setPaint(Color.white);
+        String SCORE_LABEL = "SCORE:";
         g2.drawString(SCORE_LABEL, 15, 32);
         g2.setPaint(Color.red);
         g2.drawString(score, 105, 32);
     }
 
-    public String getScore(){
+    public String getScore() {
         return score;
     }
 

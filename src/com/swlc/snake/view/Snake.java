@@ -1,9 +1,14 @@
-package com.swlc.snake;
+package com.swlc.snake.view;
+
+import com.swlc.snake.constant.Route;
 
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.swlc.snake.constant.Constants.SNAKE_X_SIZE;
+import static com.swlc.snake.constant.Constants.SNAKE_Y_SIZE;
 
 /**
  * @author Chanuka Sandaruwan
@@ -11,31 +16,46 @@ import java.util.List;
  * @project swlc-snake-game
  */
 
-public class Snake {
-    public static final int XSIZE = 20;
-    public static final int YSIZE = 20;
+/**
+ * This class represents a snake which is represented as a list of snake parts.
+ */
 
-    private GameFiled gameField;
-    private ScoreBoard scoreBoard;
+
+public class Snake {
+
+    private final Ground gameGround;
+    private final ScoreBoard scoreBoard;
     private List<Ellipse2D.Double> snakeParts;
     private Route route;
-
-    private Ellipse2D.Double temp;
     private Ellipse2D.Double ass;
-
     private boolean over = false;
 
-    public Snake(GameFiled gameField, ScoreBoard scoreBoard) {
-        this.gameField = gameField;
+
+    /**
+     * Constructs a snake object with the default snake parts
+     *
+     * @param gameGround The field on which snake can move
+     * @param scoreBoard The panel for displaying user score
+     */
+    public Snake(Ground gameGround, ScoreBoard scoreBoard) {
+        this.gameGround = gameGround;
         this.scoreBoard = scoreBoard;
         initDefaults();
     }
 
 
+    /**
+     * Changes snake's direction
+     *
+     * @param route The new direction
+     */
     public void changeDirection(Route route) {
         this.route = route;
     }
 
+    /**
+     * Moves the snake in the current direction
+     */
     public void move() {
         switch (route) {
             case UP:
@@ -43,7 +63,7 @@ public class Snake {
 
                 // turn snake direction to the up
                 snakeParts.set(0,
-                        new Ellipse2D.Double(snakeParts.get(0).getMinX(), snakeParts.get(0).getMinY() - 20, XSIZE, YSIZE));
+                        new Ellipse2D.Double(snakeParts.get(0).getMinX(), snakeParts.get(0).getMinY() - 20, SNAKE_X_SIZE, SNAKE_Y_SIZE));
                 if (snakeParts.get(0).getMinY() < 0) {
                     over = true;
                 }
@@ -54,8 +74,8 @@ public class Snake {
 
                 // turn snake direction to the down
                 snakeParts.set(0,
-                        new Ellipse2D.Double(snakeParts.get(0).getMinX(), snakeParts.get(0).getMinY() + 20, XSIZE, YSIZE));
-                if (snakeParts.get(0).getMaxY() > gameField.getBounds().getMaxY()) {
+                        new Ellipse2D.Double(snakeParts.get(0).getMinX(), snakeParts.get(0).getMinY() + 20, SNAKE_X_SIZE, SNAKE_Y_SIZE));
+                if (snakeParts.get(0).getMaxY() > gameGround.getBounds().getMaxY()) {
                     over = true;
                 }
                 break;
@@ -65,7 +85,7 @@ public class Snake {
 
                 // turn snake direction to the left
                 snakeParts.set(0,
-                        new Ellipse2D.Double(snakeParts.get(0).getMinX() - 20, snakeParts.get(0).getMinY(), XSIZE, YSIZE));
+                        new Ellipse2D.Double(snakeParts.get(0).getMinX() - 20, snakeParts.get(0).getMinY(), SNAKE_X_SIZE, SNAKE_Y_SIZE));
                 if (snakeParts.get(0).getMinX() < 0) {
                     over = true;
                 }
@@ -76,25 +96,31 @@ public class Snake {
 
                 // turn snake direction to the right
                 snakeParts.set(0,
-                        new Ellipse2D.Double(snakeParts.get(0).getMinX() + 20, snakeParts.get(0).getMinY(), XSIZE, YSIZE));
-                if (snakeParts.get(0).getMaxX() > gameField.getBounds().getMaxX()) {
+                        new Ellipse2D.Double(snakeParts.get(0).getMinX() + 20, snakeParts.get(0).getMinY(), SNAKE_X_SIZE, SNAKE_Y_SIZE));
+                if (snakeParts.get(0).getMaxX() > gameGround.getBounds().getMaxX()) {
                     over = true;
                 }
                 break;
 
             default:
-                new Exception("Unexcepted Direction value!").printStackTrace();
+                new Exception("Unexpected Direction value!").printStackTrace();
                 break;
         }
     }
 
+    /**
+     * @return Snake parts the list containing snake parts
+     */
     public List<Ellipse2D.Double> getParts() {
         return snakeParts;
     }
 
+    /**
+     * Checks if the snake ate the food or ate itself
+     */
     public void check() {
         Ellipse2D.Double head = snakeParts.get(0);
-        Food food = gameField.getFood();
+        Food food = gameGround.getFood();
 
         // Ate itself
         for (int i = 1; i < snakeParts.size(); i++) {
@@ -112,6 +138,9 @@ public class Snake {
         }
     }
 
+    /**
+     * @return true if game over, otherwise false
+     */
     public boolean isGameOver() {
         return over;
     }
@@ -121,7 +150,7 @@ public class Snake {
             if (i == snakeParts.size() - 1) {
                 ass = (Ellipse2D.Double) snakeParts.get(i).clone();
             }
-            temp = (Ellipse2D.Double) snakeParts.get(i - 1).clone();
+            Ellipse2D.Double temp = (Ellipse2D.Double) snakeParts.get(i - 1).clone();
             snakeParts.set(i, temp);
         }
     }
