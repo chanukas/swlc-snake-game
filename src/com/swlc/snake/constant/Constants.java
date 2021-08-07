@@ -19,6 +19,6 @@ public class Constants {
     public static final int GROUND_PANEL_HEIGHT = 500;
 
     // amount of time in milliseconds between each move
-    public static final int DELAY = 500;
+    public static final int DELAY = 400;
 
 }

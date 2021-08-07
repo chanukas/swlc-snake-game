@@ -110,7 +110,7 @@ public class Main extends JFrame {
 
 
     /**
-     * Entry point of the game
+     * First start point of the game
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
