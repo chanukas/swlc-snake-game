@@ -9,13 +9,11 @@ This game is written in Java swing based on a snake game similar to that found o
 
 ### How to run this project
 #### Requirements: 
-
-    * Java runtime inslaled
+* Java runtime inslaled
    
 #### How to play this game:
-    
-    * Just download the snake.jar file.
-    * Run it.
-    * Start palying with the up arrow key.
+* Just download the snake.jar file.
+* Run it.
+* Start palying with the up arrow key.
 
 
