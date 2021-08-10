@@ -161,4 +161,6 @@ public class Snake {
         snakeParts.add(new Ellipse2D.Double(260, 280, 20, 20));
     }
 
+
+
 }
