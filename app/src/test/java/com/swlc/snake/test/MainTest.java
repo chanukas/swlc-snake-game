@@ -6,12 +6,13 @@ import com.swlc.snake.util.Grid;
 import com.swlc.snake.view.Ground;
 import com.swlc.snake.view.ScoreBoard;
 import com.swlc.snake.view.Snake;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 
 /**
  * @author Chanuka Sandaruwan
@@ -27,14 +28,14 @@ public class MainTest extends JFrame {
     private Snake snake;
     private boolean started = false;
 
-    @Test
+    @Test()
     public void main() {
         initComponents();
         initGame();
         initFrame();
+        newGame();
     }
 
-    @Test
     public void initComponents() {
         setLayout(new GridBagLayout());
         addKeyListener(new KeyboardHandler());
@@ -47,14 +48,12 @@ public class MainTest extends JFrame {
 
     }
 
-    @Test
     public void initGame() {
         snake = new Snake(ground, scoreBoard);
         Runnable r = new SnakeHandler(ground, snake, null);
         thread = new Thread(r);
     }
 
-    @Test
     public void initFrame() {
         pack();
         setTitle("Snake");
@@ -64,32 +63,19 @@ public class MainTest extends JFrame {
         setVisible(true);
     }
 
-    @Test
     public void newGame() {
         started = true;
         thread.start();
+        gameOver();
     }
 
-    @Test
+
     public void gameOver() {
-        int returnValue = JOptionPane.showConfirmDialog(this,
+        JOptionPane.showConfirmDialog(this,
                 "Your score is " + scoreBoard.getScore() + "\n Do you want to start a new game?", "GAME OVER!", JOptionPane
                         .OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        System.exit(0);
 
-        if (returnValue == JOptionPane.OK_OPTION) {
-            route = Route.UP;
-            started = false;
-            snake = new Snake(ground, scoreBoard);
-            scoreBoard.clear();
-            ground.initDefaults();
-            scoreBoard.repaint();
-            ground.repaint();
-            Runnable r = new SnakeHandler(ground, snake, null);
-            thread = null;
-            thread = new Thread(r);
-        } else {
-            System.exit(0);
-        }
     }
 
     private class KeyboardHandler extends KeyAdapter {

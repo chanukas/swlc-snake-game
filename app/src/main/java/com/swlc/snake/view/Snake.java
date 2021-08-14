@@ -162,5 +162,19 @@ public class Snake {
     }
 
 
+    public List<Ellipse2D.Double> getSnakeParts() {
+        return snakeParts;
+    }
 
+    public void setSnakeParts(List<Ellipse2D.Double> snakeParts) {
+        this.snakeParts = snakeParts;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }

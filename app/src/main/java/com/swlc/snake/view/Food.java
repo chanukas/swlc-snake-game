@@ -12,9 +12,8 @@ import static com.swlc.snake.constant.Constants.FOOD_Y_SIZE;
  */
 
 /**
- * This class represents an food which can be ate by the snake. It pop up randomly somewhere within the game ground.
+ * This class represents an food which can be ate by the snake.
  */
-
 
 public class Food {
 
@@ -23,8 +22,8 @@ public class Food {
 
     /**
      * Creates an food with given coordinates
-     * @param x The x coordinate of food's upper left corner
-     * @param y The y coordinate of food's upper left corner
+     * @param x The x coordinate of food
+     * @param y The y coordinate of food'
      */
     public Food(double x, double y) {
         this.x = x;

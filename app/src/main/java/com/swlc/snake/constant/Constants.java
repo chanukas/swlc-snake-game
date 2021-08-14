@@ -5,6 +5,7 @@ package com.swlc.snake.constant;
  * @created 06/08/2021 - 08:43 pm
  * @project swlc-snake-game
  */
+
 public class Constants {
     public static final int SNAKE_X_SIZE = 20;
     public static final int SNAKE_Y_SIZE = 20;
@@ -22,3 +23,5 @@ public class Constants {
     public static final int DELAY = 400;
 
 }
+
+
